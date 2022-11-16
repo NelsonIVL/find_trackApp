@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_track/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -106,6 +107,7 @@ class _SongsListState extends State<SongsList> {
                                 )),
                             TextButton(
                                 onPressed: () {
+                                  deleteSong(widget.songs);
                                   Navigator.pop(context);
                                   context
                                       .read<MainProvider>()
@@ -131,5 +133,20 @@ class _SongsListState extends State<SongsList> {
         ),
       ),
     );
+  }
+
+  deleteSong(Map songs) async {
+    await FirebaseFirestore.instance
+        .collection('favorites')
+        .where('songName', isEqualTo: songs['songName'])
+        .get()
+        .then((value) => {
+              value.docs.forEach((element) {
+                FirebaseFirestore.instance
+                    .collection('favorites')
+                    .doc(element.id)
+                    .delete();
+              })
+            });
   }
 }
