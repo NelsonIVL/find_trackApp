@@ -1,24 +1,48 @@
-import 'package:find_track/home_page.dart';
+import 'package:find_track/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SignInScreen(
-          providerConfigs: [
-            EmailProviderConfiguration(),
-            GoogleProviderConfiguration(clientId: "")
-          ],
-          actions: [
-            AuthStateChangeAction<SignedIn>((context, state) {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => HomePage()));
-            }),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                "Sign In",
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 200),
+            MaterialButton(
+              child: Text("Iniciar como anonimo"),
+              color: Colors.grey,
+              onPressed: () {},
+            ),
+            Text(
+              "Utiliza un red social",
+            ),
+            MaterialButton(
+              child: Text("Iniciar con Google"),
+              color: Colors.green,
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context).add(GoogleAuthEvent());
+              },
+            ),
           ],
         ),
       ),

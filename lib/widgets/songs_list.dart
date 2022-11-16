@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SongsList extends StatefulWidget {
   final Function? function;
-  final Map<dynamic, dynamic> songs;
+  final QueryDocumentSnapshot songs;
   final indice;
 
   SongsList(
@@ -109,9 +109,6 @@ class _SongsListState extends State<SongsList> {
                                 onPressed: () {
                                   deleteSong(widget.songs);
                                   Navigator.pop(context);
-                                  context
-                                      .read<MainProvider>()
-                                      .deleteFromList(widget.indice);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text("Procesando...")));
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -135,7 +132,7 @@ class _SongsListState extends State<SongsList> {
     );
   }
 
-  deleteSong(Map songs) async {
+  deleteSong(QueryDocumentSnapshot songs) async {
     await FirebaseFirestore.instance
         .collection('favorites')
         .where('songName', isEqualTo: songs['songName'])

@@ -1,5 +1,6 @@
 import 'package:find_track/auth/bloc/auth_bloc.dart';
 import 'package:find_track/login/login_page.dart';
+import 'package:find_track/login/login_page2.dart';
 import 'package:find_track/providers/main_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
