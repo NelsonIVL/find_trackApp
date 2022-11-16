@@ -137,13 +137,30 @@ class SongFound extends StatelessWidget {
     );
   }
 
+//FUNCION QUE AGREGA A FIREBASE LA CANCION
   createDoc(Map song) async {
-    await FirebaseFirestore.instance.collection("favorites").add({
+    /*await FirebaseFirestore.instance
+        .collection('favorites')
+        .where('songName', isEqualTo: song['songName'])
+        .get()
+        .then((value) => {
+              value.docs.forEach((element) {
+                if (element.exists) {
+                  print("Ya existe el documento en la colección");
+                  return;
+                }
+              })
+            });*/
+
+    DocumentReference ref =
+        await FirebaseFirestore.instance.collection("favorites").doc();
+    ref.set({
       'album': song["album"],
       'artist': song["artist"],
       'image': song["image"],
       'relDate': song["relDate"],
-      'songName': song["songName"]
+      'songName': song["songName"],
+      'uid': "${ref.id}"
     });
   }
 }
