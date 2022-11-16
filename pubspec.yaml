@@ -38,12 +38,16 @@ dependencies:
   url_launcher: ^6.1.6
   record: ^4.4.0
   font_awesome_flutter: ^10.2.1
+  flutter_bloc:
+  equatable:
 
   #FireBase plugins
   firebase_core: ^2.2.0
   firebase_auth: ^4.1.2
   firebase_storage: ^11.0.5
   flutterfire_ui:
+  google_sign_in:
+  cloud_firestore:
 
 
   # The following adds the Cupertino Icons font to your application.

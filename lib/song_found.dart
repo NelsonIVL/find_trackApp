@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_track/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,6 +34,7 @@ class SongFound extends StatelessWidget {
                               )),
                           TextButton(
                               onPressed: () {
+                                createDoc(context.read<MainProvider>().found);
                                 Navigator.pop(context);
                                 context.read<MainProvider>().pushToList();
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -133,5 +135,15 @@ class SongFound extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  createDoc(Map song) async {
+    await FirebaseFirestore.instance.collection("favorites").add({
+      'album': song["album"],
+      'artist': song["artist"],
+      'image': song["image"],
+      'relDate': song["relDate"],
+      'songName': song["songName"]
+    });
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SongsList extends StatelessWidget {
+class SongsList extends StatefulWidget {
   final Function? function;
   final Map<dynamic, dynamic> songs;
   final indice;
@@ -11,6 +11,11 @@ class SongsList extends StatelessWidget {
   SongsList(
       {super.key, this.function, required this.songs, required this.indice});
 
+  @override
+  State<SongsList> createState() => _SongsListState();
+}
+
+class _SongsListState extends State<SongsList> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,7 +58,7 @@ class SongsList extends StatelessWidget {
                       }));
                 },
                 child: Image.network(
-                  "${songs["image"]}",
+                  "${widget.songs["image"]}",
                   fit: BoxFit.fill,
                 ),
               ),
@@ -70,11 +75,11 @@ class SongsList extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "${songs["songName"]}",
+                        "${widget.songs["songName"]}",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("${songs["artist"]}"),
+                      Text("${widget.songs["artist"]}"),
                     ],
                   ),
                 ),
@@ -104,7 +109,7 @@ class SongsList extends StatelessWidget {
                                   Navigator.pop(context);
                                   context
                                       .read<MainProvider>()
-                                      .deleteFromList(indice);
+                                      .deleteFromList(widget.indice);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text("Procesando...")));
                                   ScaffoldMessenger.of(context).showSnackBar(
