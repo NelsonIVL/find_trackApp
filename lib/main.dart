@@ -1,5 +1,4 @@
 import 'package:find_track/auth/bloc/auth_bloc.dart';
-import 'package:find_track/login/login_page.dart';
 import 'package:find_track/login/login_page2.dart';
 import 'package:find_track/providers/main_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,23 +32,6 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.purple, brightness: Brightness.light),
         themeMode: ThemeMode.dark,
         darkTheme: ThemeData(brightness: Brightness.dark),
-        home:
-            HomePage()); /*BlocConsumer<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is AuthErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Favor de autenticarse")));
-            }
-          },
-          builder: (context, state) {
-            if (state is AuthSuccessState) {
-              return HomePage();
-            } else if (state is UnAuthState || state is SignOutSuccessState) {
-              return LoginPage();
-            }
-            return Center(
-                child: CircularProgressIndicator(color: Colors.white));
-          },
-        ));*/
+        home: HomePage());
   }
 }

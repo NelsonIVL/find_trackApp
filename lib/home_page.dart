@@ -5,6 +5,7 @@ import 'package:find_track/song_found.dart';
 import 'package:flutter/material.dart';
 import 'package:find_track/favorites.dart';
 import 'package:find_track/providers/main_provider.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -68,7 +69,11 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: ((context) => Favorites())));
                 },
                 child: Icon(Icons.favorite),
-              )
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              SignOutButton()
             ],
           ),
         ),

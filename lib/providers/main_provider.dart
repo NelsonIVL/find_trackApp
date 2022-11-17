@@ -78,6 +78,7 @@ class MainProvider with ChangeNotifier {
           "api_token": apiKey,
           "return": "spotify,apple_music,deezer"
         });
+
         if (response.statusCode == HttpStatus.ok) {
           print(jsonDecode(response.body));
           final body = jsonDecode(response.body);
